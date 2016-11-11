@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{blog.title}}</title>
+    <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.1.8/semantic.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/markdown.css">
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/semantic-ui/2.1.8/semantic.min.js"></script>
+</head>
+<body>
+    <div class="nav">
+        <div class="ui grid">
+            <div class="four wide column"></div>
+
+            <div class="eight wide column">
+                <a href="/posts"><h1>{{blog.title}}</h1></a>
+                <p>{{blog.description}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="nav-setting">
+        <div class="ui buttons">
+            <div class="ui floating dropdown button">
+                <i class="icon bars"></i>
+                <div class="menu">
+                    {{#if user}}
+                    <a class="item" href="/posts?author={{user._id}}">个人主页</a>
+                    <div class="divider"></div>
+                    <a class="item" href="/posts/create">发表文章</a>
+                    <a class="item" href="/signout">登出</a>
+                    {{else}}
+                    <a class="item" href="/signin">登录</a>
+                    <a class="item" href="/signup">注册</a>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui grid">
+        <div class="four wide column"></div>
+        <div class="eight wide column">
+            {{#if success}}
+            <div class="ui success message">
+                <p>{{success}}</p>
+            </div>
+            {{/if}}
+            {{#if error}}
+            <div class="ui error message">
+                <p>{{error}}</p>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+    {{{body}}}
+    <script type="text/javascript">
+        // 点击按钮弹出下拉框
+        $('.ui.dropdown').dropdown();
+        // 鼠标悬浮在头像上，弹出气泡提示框
+        $('.post-content .avatar').popup({
+            inline: true,
+            position: 'bottom right',
+            lastResort: 'bottom right',
+        });
+    </script>
+</body>
+</html>
